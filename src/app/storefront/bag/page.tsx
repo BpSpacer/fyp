@@ -118,12 +118,12 @@ export default async function BagRoute() {
                   />
                 </div>
                 <div className="w-1/2">
-                  <Label htmlFor="zip">Zip</Label>
+                  <Label htmlFor="phone">Phone No</Label>
                   <Input
-                    id="zip"
-                    name="zip"
+                    id="phone"
+                    name="phone"
                     required
-                    placeholder="Zip Code"
+                    placeholder="Phone No"
                   />
                 </div>
               </div>

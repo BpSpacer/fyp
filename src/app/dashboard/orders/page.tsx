@@ -27,7 +27,7 @@ async function getData() {
       addressLine1: true,
       city: true,
       state: true,
-      zip: true,
+      phone: true,
       User: {
         select: {
           firstName: true,
@@ -97,7 +97,7 @@ export default async function OrdersPage() {
                 <TableCell className="text-right">
                   <div>
                     <p>{item.addressLine1}</p>
-                    <p>{item.city}, {item.state} {item.zip}</p>
+                    <p>{item.city}, {item.state} {item.phone}</p>
                   </div>
                 </TableCell>
               </TableRow>
