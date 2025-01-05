@@ -53,7 +53,7 @@ model Order {
   addressLine1 String
   city         String
   state        String
-  phoneno      String
+  zip          String
   notes        String?  // Optional field for additional notes
 
   User         User?    @relation(fields: [userId], references: [id])
