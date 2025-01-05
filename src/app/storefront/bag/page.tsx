@@ -24,6 +24,8 @@ export default async function BagRoute() {
 
   const cart: Cart | null = await redis.get(`cart-${user.id}`);
 
+  let totalPrice = 0;
+
   cart?.items.forEach((item) => {
     totalPrice += item.price * item.quantity;
   });
