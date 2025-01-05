@@ -37,15 +37,15 @@ export default async function BagRoute() {
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
             <ShoppingBag className="w-10 h-10 text-primary" />
           </div>
-
+  
           <h2 className="mt-6 text-xl font-semibold">
-            You dont have any products in your Bag
+            You don't have any products in your Bag
           </h2>
           <p className="mb-8 mt-2 text-center text-sm leading-6 text-muted-foreground max-w-sm mx-auto">
-            You currently dont have any products in your shopping bag. Please
+            You currently don't have any products in your shopping bag. Please
             add some so that you can see them right here.
           </p>
-
+  
           <Button asChild>
             <Link href="/">Shop Now!</Link>
           </Button>
@@ -69,7 +69,7 @@ export default async function BagRoute() {
                     <p>{item.quantity} x</p>
                     <p>${item.price}</p>
                   </div>
-
+  
                   <form action={delItem} className="text-end">
                     <input type="hidden" name="productId" value={item.id} />
                     <DeleteItem />
@@ -79,6 +79,12 @@ export default async function BagRoute() {
             </div>
           ))}
           
+          {/* Total Price Section */}
+          <div className="mt-6 flex justify-between items-center font-semibold">
+            <p>Total Price</p>
+            <p>${totalPrice.toFixed(2)}</p>
+          </div>
+  
           {/* Address Form */}
           <div className="mt-10">
             <h3 className="text-lg font-medium">Enter Your Address</h3>
