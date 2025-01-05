@@ -39,10 +39,10 @@ export default async function BagRoute() {
           </div>
 
           <h2 className="mt-6 text-xl font-semibold">
-            You dont have any products in your Bag
+            You don't have any products in your Bag
           </h2>
           <p className="mb-8 mt-2 text-center text-sm leading-6 text-muted-foreground max-w-sm mx-auto">
-            You currently dont have any products in your shopping bag. Please
+            You currently don't have any products in your shopping bag. Please
             add some so that you can see them right here.
           </p>
 
@@ -78,7 +78,13 @@ export default async function BagRoute() {
               </div>
             </div>
           ))}
-          
+
+          {/* Total Price */}
+          <div className="mt-10 flex justify-between font-medium">
+            <p>Total Price:</p>
+            <p>${totalPrice.toFixed(2)}</p>
+          </div>
+
           {/* Address Form */}
           <div className="mt-10">
             <h3 className="text-lg font-medium">Enter Your Address</h3>
