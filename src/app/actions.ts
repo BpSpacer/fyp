@@ -252,7 +252,7 @@ export async function checkOut(formData: FormData) {
     const addressLine1 = formData.get("addressLine1") as string;
     const city = formData.get("city") as string;
     const state = formData.get("state") as string;
-    const zip = formData.get("zip") as string;
+    const phoneno = formData.get("phoneno") as string;
     const notes = formData.get("notes") as string | null;
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =

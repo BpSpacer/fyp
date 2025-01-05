@@ -96,7 +96,7 @@ export default async function OrdersPage() {
                 <TableCell className="text-right">
                   <div>
                     <p>{item.addressLine1}</p>
-                    <p>{item.city}, {item.state} {item.zip}</p>
+                    <p>{item.city}, {item.state} {item.phoneno}</p>
                   </div>
                 </TableCell>
               </TableRow>

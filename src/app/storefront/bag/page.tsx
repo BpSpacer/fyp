@@ -1,5 +1,5 @@
 import { checkOut, delItem } from "@/app/actions";
-import { ChceckoutButton, DeleteItem } from "@/app/components/SubmitButtons";
+import { DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
@@ -115,7 +115,7 @@ export default async function BagRoute() {
                   <Label htmlFor="phoneno">Phone No</Label>
                   <Input
                     id="phoneno"
-                    name="pgoneno"
+                    name="phoneno"
                     required
                     placeholder="Phone No"
                   />
