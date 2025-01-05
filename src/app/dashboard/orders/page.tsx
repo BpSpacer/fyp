@@ -80,12 +80,6 @@ export default async function OrdersPage() {
                   </div>
                 </TableCell>
 
-                <TableCell>
-                  <p className="font-medium">{item.User?.firstName}</p>
-                  <p className="hidden md:flex text-sm text-muted-foreground">
-                    {item.User?.email}
-                  </p>
-                </TableCell>
                 <TableCell>Order</TableCell>
                 <TableCell>{item.status}</TableCell>
                 <TableCell>
