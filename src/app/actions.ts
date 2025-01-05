@@ -237,7 +237,7 @@ export async function delItem(formData: FormData) {
   revalidatePath("/storefront/bag");
 }
 
-export async function checkOut() {
+export async function checkOut(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -248,6 +248,13 @@ export async function checkOut() {
   const cart: Cart | null = await redis.get(`cart-${user.id}`);
 
   if (cart && cart.items) {
+    // Extract address details from form data
+    const addressLine1 = formData.get("addressLine1") as string;
+    const city = formData.get("city") as string;
+    const state = formData.get("state") as string;
+    const zip = formData.get("zip") as string;
+    const notes = formData.get("notes") as string | null;
+
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
       cart.items.map((item) => ({
         price_data: {
@@ -278,7 +285,7 @@ export async function checkOut() {
       },
     });
 
-    // Save the order in the database
+    // Save the order with address details in the database
     const totalAmount = cart.items.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
@@ -289,6 +296,11 @@ export async function checkOut() {
         userId: user.id,
         status: "pending",
         amount: totalAmount,
+        addressLine1,
+        city,
+        state,
+        phoneno,
+        notes,
       },
     });
 
@@ -296,7 +308,5 @@ export async function checkOut() {
     await redis.del(`cart-${user.id}`);
 
     return redirect(session.url as string);
-  } else {
-    throw new Error("Cart is empty or missing.");
-  }
+  } 
 }

@@ -23,6 +23,10 @@ async function getData() {
       createdAt: true,
       status: true,
       id: true,
+      addressLine1: true,
+      city: true,
+      state: true,
+      phoneno: true,
       User: {
         select: {
           firstName: true,
@@ -56,7 +60,8 @@ export default async function OrdersPage() {
               <TableHead>Type</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead className="text-right">Address</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -80,13 +85,19 @@ export default async function OrdersPage() {
                   </div>
                 </TableCell>
 
-                <TableCell>Order</TableCell>
+                <TableCell className="text-green-500">PAID</TableCell>
                 <TableCell>{item.status}</TableCell>
                 <TableCell>
                   {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell>
                   ${new Intl.NumberFormat("en-US").format(item.amount / 100)}
+                </TableCell>
+                <TableCell className="text-right">
+                  <div>
+                    <p>{item.addressLine1}</p>
+                    <p>{item.city}, {item.state} {item.zip}</p>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
