@@ -267,11 +267,11 @@ export async function checkOut() {
       success_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/storefront/payment/success"
-          : "https://ecomahsan.vercel.app/storefront/payment/success",
+          : "https://fypiqra.vercel.app/storefront/payment/success",
       cancel_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/storefront/payment/cancel"
-          : "https://ecomahsan.vercel.app/storefront/payment/cancel",
+          : "https://fypiqra.vercel.app/storefront/payment/cancel",
       metadata: {
         userId: user.id,
       },
