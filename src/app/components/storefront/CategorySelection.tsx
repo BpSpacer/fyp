@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import all from "@/public/all.jpeg";
-import men from "@/public/men.jpeg";
-import women from "@/public/women.jpeg";
+import all from '@/public/all.png'
+import men from "@/public/men.png";
+import women from "@/public/women.png";
 
 export function CategoriesSelection() {
   return (
