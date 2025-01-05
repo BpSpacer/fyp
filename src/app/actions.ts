@@ -277,6 +277,9 @@ export async function checkOut() {
       },
     });
 
+    // Clear the cart after payment success
+    await redis.del(`cart-${user.id}`);
+
     return redirect(session.url as string);
   }
 }
