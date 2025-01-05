@@ -9,9 +9,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 import { redirect } from "next/navigation";
-import { Input } from "@/components/ui/input"; 
-import { Label } from "@/components/ui/label"; 
-import { Textarea } from "@/components/ui/textarea"; 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export default async function BagRoute() {
   noStore();
@@ -39,10 +39,10 @@ export default async function BagRoute() {
           </div>
 
           <h2 className="mt-6 text-xl font-semibold">
-            You don't have any products in your Bag
+            You don&apos;t have any products in your Bag
           </h2>
           <p className="mb-8 mt-2 text-center text-sm leading-6 text-muted-foreground max-w-sm mx-auto">
-            You currently don't have any products in your shopping bag. Please
+            You currently don&apos;t have any products in your shopping bag. Please
             add some so that you can see them right here.
           </p>
 
