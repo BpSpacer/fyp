@@ -8,7 +8,13 @@ export async function POST(req: Request) {
 
   const signature = headers().get("Stripe-Signature") as string;
 
-  let event;
+  let event;      // await prisma.order.create({
+      //   data: {
+      //     amount: session.amount_total as number,
+      //     status: session.status as string,
+      //     userId: session.metadata?.userId,
+      //   },
+      // });
 
   try {
     event = stripe.webhooks.constructEvent(
@@ -25,13 +31,7 @@ export async function POST(req: Request) {
     case "checkout.session.completed": {
       const session = event.data.object;
 
-      await prisma.order.create({
-        data: {
-          amount: session.amount_total as number,
-          status: session.status as string,
-          userId: session.metadata?.userId,
-        },
-      });
+
 
       await redis.del(`cart-${session.metadata?.userId}`);
       break;
