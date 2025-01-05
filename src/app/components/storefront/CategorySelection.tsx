@@ -14,7 +14,7 @@ export function CategoriesSelection() {
 
         <Link
           className="text-sm font-semibold text-primary hover:text-primary/80"
-          href="/products/all"
+          href="/storefront/products/all"
         >
           Browse all Products &rarr;
         </Link>
@@ -29,7 +29,7 @@ export function CategoriesSelection() {
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
           <div className="p-6 flex items-end">
-            <Link href="/products/all">
+            <Link href="/storefront/products/all">
               <h3 className="text-black font-semibold">All Products</h3>
               <p className="mt-1 text-sm text-black">Shop Now</p>
             </Link>
@@ -44,7 +44,7 @@ export function CategoriesSelection() {
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
           <div className="p-6 flex items-end sm:absolute sm:inset-0">
-            <Link href="/products/sindhi">
+            <Link href="/storefront/products/sindhi">
               <h3 className="text-white font-semibold">Products from Sindh</h3>
               <p className="mt-1 text-sm text-white">Shop Now</p>
             </Link>
@@ -59,7 +59,7 @@ export function CategoriesSelection() {
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
           <div className="p-6 flex items-end sm:absolute sm:inset-0">
-            <Link href="/products/pakhtun">
+            <Link href="/storefront/products/pakhtun">
               <h3 className="text-white font-semibold">Products from KPK</h3>
               <p className="mt-1 text-sm text-white">Shop Now</p>
             </Link>

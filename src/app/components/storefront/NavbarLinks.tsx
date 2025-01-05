@@ -4,14 +4,15 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
+import Image from "next/image";
 
 export const navbarLinks = [
-  { id: 1, name: "Saraiki", href: "/products/saraiki" },
-  { id: 2, name: "Sindhi", href: "/products/sindhi" },
-  { id: 3, name: "Punjabi", href: "/products/punjabi" },
-  { id: 4, name: "Pashtun", href: "/products/pashtun" },
-  { id: 5, name: "Balochi", href: "/products/balochi" },
-  { id: 6, name: "Kashmiri", href: "/products/kashmiri" },
+  { id: 1, name: "Saraiki", href: "/storefront/products/saraiki" },
+  { id: 2, name: "Sindhi", href: "/storefront/products/sindhi" },
+  { id: 3, name: "Punjabi", href: "/storefront/products/punjabi" },
+  { id: 4, name: "Pashtun", href: "/storefront/products/pashtun" },
+  { id: 5, name: "Balochi", href: "/storefront/products/balochi" },
+  { id: 6, name: "Kashmiri", href: "/storefront/products/kashmiri" },
 ];
 
 export function NavbarLinks() {
@@ -53,7 +54,7 @@ export function NavbarLinks() {
 >
   {/* All Products Button */}
   <Link
-    href="/products/all"
+    href="/storefront/products/all"
     className="p-2 font-medium rounded-md bg-muted hover:bg-muted/75"
   >
     All Products
@@ -133,12 +134,12 @@ export function NavbarLinks() {
             We are a company dedicated to showcasing cultural diversity.
           </p>
           <div className="flex justify-center gap-2">
-            <img
+            <Image
               src="/images/about1.jpg"
               alt="About 1"
               className="w-24 h-24 rounded-md object-cover"
             />
-            <img
+            <Image
               src="/images/about2.jpg"
               alt="About 2"
               className="w-24 h-24 rounded-md object-cover"

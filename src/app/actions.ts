@@ -234,7 +234,7 @@ export async function delItem(formData: FormData) {
     await redis.set(`cart-${user.id}`, updateCart);
   }
 
-  revalidatePath("/bag");
+  revalidatePath("/storefront/bag");
 }
 
 export async function checkOut() {
@@ -266,12 +266,12 @@ export async function checkOut() {
       line_items: lineItems,
       success_url:
         process.env.NODE_ENV === "development"
-          ? "http://localhost:3000/payment/success"
-          : "https://ecomahsan.vercel.app/payment/success",
+          ? "http://localhost:3000/storefront/payment/success"
+          : "https://ecomahsan.vercel.app/storefront/payment/success",
       cancel_url:
         process.env.NODE_ENV === "development"
-          ? "http://localhost:3000/payment/cancel"
-          : "https://ecomahsan.vercel.app/payment/cancel",
+          ? "http://localhost:3000/storefront/payment/cancel"
+          : "https://ecomahsan.vercel.app/storefront/payment/cancel",
       metadata: {
         userId: user.id,
       },
