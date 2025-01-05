@@ -63,6 +63,24 @@ export default async function OrdersPage() {
             {data.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>
+                  <div className="flex items-center space-x-2">
+                    {item.User?.profileImage && (
+                      <img
+                        src={item.User.profileImage}
+                        alt="Profile"
+                        className="w-8 h-8 rounded-full"
+                      />
+                    )}
+                    <div>
+                      <p className="font-medium">{item.User?.firstName}</p>
+                      <p className="hidden md:flex text-sm text-muted-foreground">
+                        {item.User?.email}
+                      </p>
+                    </div>
+                  </div>
+                </TableCell>
+
+                <TableCell>
                   <p className="font-medium">{item.User?.firstName}</p>
                   <p className="hidden md:flex text-sm text-muted-foreground">
                     {item.User?.email}

@@ -274,12 +274,29 @@ export async function checkOut() {
           : "https://fypiqra.vercel.app/storefront/payment/cancel",
       metadata: {
         userId: user.id,
+        cartId: `cart-${user.id}`,
       },
     });
 
-    // Clear the cart after payment success
+    // Save the order in the database
+    const totalAmount = cart.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    await prisma.order.create({
+      data: {
+        userId: user.id,
+        status: "pending",
+        amount: totalAmount,
+      },
+    });
+
+    // Clear the cart after saving the order
     await redis.del(`cart-${user.id}`);
 
     return redirect(session.url as string);
+  } else {
+    throw new Error("Cart is empty or missing.");
   }
 }
