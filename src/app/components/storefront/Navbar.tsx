@@ -29,7 +29,7 @@ export async function Navbar() {
       <div className="flex items-center">
         <Link href="/">
           <h1 className="text-black font-bold text-xl lg:text-3xl">
-            E-Com<span className="text-primary">-Ahsan</span>
+            Cultural<span className="text-primary">Hatti</span>
           </h1>
         </Link>
         <NavbarLinks />

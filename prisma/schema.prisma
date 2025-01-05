@@ -64,7 +64,10 @@ enum ProductStatus {
 }
 
 enum Category {
-  men
-  women
-  kids
+  saraiki
+  sindhi
+  punjabi
+  pashtun
+  balochi
+  kashmiri
 }

@@ -24,11 +24,11 @@ async function getData(productCategory: string) {
         data: data,
       };
     }
-    case "men": {
+    case "saraiki": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
-          category: "men",
+          category: "saraiki",
         },
         select: {
           name: true,
@@ -40,15 +40,15 @@ async function getData(productCategory: string) {
       });
 
       return {
-        title: "Products for Men",
+        title: "Products from Kpk",
         data: data,
       };
     }
-    case "women": {
+    case "sindhi": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
-          category: "women",
+          category: "sindhi",
         },
         select: {
           name: true,
@@ -60,15 +60,15 @@ async function getData(productCategory: string) {
       });
 
       return {
-        title: "Products to Women",
+        title: "Products from Sindh",
         data: data,
       };
     }
-    case "kids": {
+    case "punjabi": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
-          category: "kids",
+          category: "punjabi",
         },
         select: {
           name: true,
@@ -80,7 +80,67 @@ async function getData(productCategory: string) {
       });
 
       return {
-        title: "Products for Kids",
+        title: "Products from Punjab",
+        data: data,
+      };
+    }
+    case "pashtun": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "pashtun",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products from Kpk",
+        data: data,
+      };
+    }
+    case "balochi": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "balochi",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products from Balochistan",
+        data: data,
+      };
+    }
+    case "kashmiri": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "kashmiri",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products from Kashmir",
         data: data,
       };
     }
@@ -98,7 +158,7 @@ export default async function CategoriesPage({
   noStore();
   const { data, title } = await getData(params.name);
   return (
-    <section>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 className="font-semibold text-3xl my-5">{title}</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {data.map((item) => (
