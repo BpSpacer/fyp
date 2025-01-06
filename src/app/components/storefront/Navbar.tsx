@@ -10,6 +10,9 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
+import logo from "@/public/Cultural Hatti.png";
+import Image from "next/image";
+
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -27,8 +30,16 @@ export async function Navbar() {
   return (
     <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
       <div className="flex items-center">
+      <Link href="/">
+          <Image
+          src={logo}
+          alt="logo"
+          height={30}
+          width={30}
+          />
+        </Link>
         <Link href="/">
-          <h1 className="text-black font-bold text-xl lg:text-3xl">
+          <h1 className="text-black font-bold text-xl lg:text-3xl px-2">
             Cultural<span className="text-primary">Hatti</span>
           </h1>
         </Link>
