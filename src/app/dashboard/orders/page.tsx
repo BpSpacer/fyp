@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { unstable_noStore as noStore } from "next/cache";
 import Image from "next/image";
+import logo from "@/public/Cultural Hatti.png";
 
 async function getData() {
   const data = await prisma.order.findMany({
@@ -72,8 +73,10 @@ export default async function OrdersPage() {
                   <div className="flex items-center space-x-2">
                     {item.User?.profileImage && (
                       <Image
-                        src={item.User.profileImage}
+                        src={item.User.profileImage || logo}
                         alt="Profile"
+                        width={8}
+                        height={8}
                         className="w-8 h-8 rounded-full"
                       />
                     )}

@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { DashboardNavigation } from "../components/dashboard/DashboardNavigation";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { CircleUser, MenuIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +14,9 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { unstable_noStore as noStore } from "next/cache";
+import logout from '@/public/Cultural Hatti.png'
+import Image from "next/image";
+import { MenuIcon } from "lucide-react";
 
 export default async function DashboardLayout({
   children,
@@ -54,8 +56,14 @@ export default async function DashboardLayout({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="w-5 h-5" />
+            <Button variant="secondary" size="icon" className="rounded-full border-black">
+              {/* <CircleUser className="w-5 h-5" /> */}
+              <Image
+              src={logout}
+              alt={"Logo"}
+              width={35}
+              height={35}
+              />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

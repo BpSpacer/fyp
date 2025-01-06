@@ -5,6 +5,8 @@ import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import Image from "next/image";
+import logo from "@/public/Cultural Hatti (1).png";
+
 
 export const navbarLinks = [
   { id: 1, name: "Saraiki", href: "/storefront/products/saraiki" },
@@ -135,14 +137,9 @@ export function NavbarLinks() {
           </p>
           <div className="flex justify-center gap-2">
             <Image
-              src="/images/about1.jpg"
+              src={logo}
               alt="About 1"
-              className="w-24 h-24 rounded-md object-cover"
-            />
-            <Image
-              src="/images/about2.jpg"
-              alt="About 2"
-              className="w-24 h-24 rounded-md object-cover"
+              className="w-auto h-auto rounded-md object-cover"
             />
           </div>
         </div>
