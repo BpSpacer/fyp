@@ -88,7 +88,7 @@ export async function SellProduct(prevState: unknown, formData: FormData) {
   return redirect(`/seller-product/${data.id}`);
 }
 
-export async function UpdateUserSettings(prevState: any, formData: FormData) {
+export async function UpdateUserSettings(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -111,15 +111,15 @@ export async function UpdateUserSettings(prevState: any, formData: FormData) {
     return state;
   }
 
-  const data = await prisma.user.update({
-    where: {
-      id: user.id,
-    },
-    data: {
-      firstName: validateFields.data.firstName,
-      lastName: validateFields.data.lastName,
-    },
-  });
+  // const data = await prisma.user.update({
+  //   where: {
+  //     id: user.id,
+  //   },
+  //   data: {
+  //     firstName: validateFields.data.firstName,
+  //     lastName: validateFields.data.lastName,
+  //   },
+  // });
 
   const state: State = {
     status: "success",

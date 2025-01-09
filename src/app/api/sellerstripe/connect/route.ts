@@ -20,28 +20,28 @@ export async function POST(req: Request) {
     return new Response("webhook error", { status: 400 });
   }
 
-  switch (event.type) {
-    case "account.updated": {
-      const account = event.data.object;
+  // switch (event.type) {
+  //   case "account.updated": {
+  //     const account = event.data.object;
 
-      const data = await prisma.user.update({
-        where: {
-          connectedAccountId: account.id,
-        },
-        data: {
-          stripeConnectedLinked:
-            account.capabilities?.transfers === "pending" ||
-            account.capabilities?.transfers === "inactive"
-              ? false
-              : true,
-        },
-      });
-      break;
-    }
-    default: {
-      console.log("unhandled event");
-    }
-  }
+  //     const data = await prisma.user.update({
+  //       where: {
+  //         connectedAccountId: account.id,
+  //       },
+  //       data: {
+  //         stripeConnectedLinked:
+  //           account.capabilities?.transfers === "pending" ||
+  //           account.capabilities?.transfers === "inactive"
+  //             ? false
+  //             : true,
+  //       },
+  //     });
+  //     break;
+  //   }
+  //   default: {
+  //     console.log("unhandled event");
+  //   }
+  // }
 
   return new Response(null, { status: 200 });
 }

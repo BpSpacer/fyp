@@ -2,7 +2,6 @@ import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShoppingBagIcon } from "lucide-react";
-import { UserDropdown } from "./UseDropdown";
 import { Button } from "@/components/ui/button";
 import {
   LoginLink,

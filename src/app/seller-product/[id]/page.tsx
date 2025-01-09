@@ -118,7 +118,8 @@ export default async function ProductPage({
             </span>
           </div>
           <h3 className="text-sm font-medium text-muted-foreground col-span-2 mt-4 ">
-            ✅ This store is Verified! Shop with confidence knowing you're partnering with a trusted seller 🤝, dedicated to delivering exceptional products 📦 and outstanding customer service 🌟.
+            ✅ This store is Verified! Shop with confidence knowing you&apos;re partnering with a trusted seller 🤝, dedicated to delivering exceptional products 📦 and outstanding customer service 🌟.
+
           </h3>
         </div>
 
@@ -131,7 +132,7 @@ export default async function ProductPage({
         </div>
       </div>
     </section>
-    <Footer/>
+      <Footer />
     </>
   );
 }

@@ -119,7 +119,7 @@ export function SellForm() {
               setImages(res.map((item) => item.url));
               toast.success("Your images have been uploaded");
             }}
-            onUploadError={(error: Error) => {
+            onUploadError={() => {
               toast.error("Something went wrong, try again");
             }}
           />
@@ -137,7 +137,7 @@ export function SellForm() {
               toast.success("Your Product file has been uplaoded!");
             }}
             endpoint="productFileUpload"
-            onUploadError={(error: Error) => {
+            onUploadError={() => {
               toast.error("Something went wrong, try again");
             }}
           />

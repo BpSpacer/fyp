@@ -2,26 +2,26 @@ import { Card } from "@/components/ui/card";
 
 import { SellForm } from "../components/sellerform/Sellform";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import prisma from "../lib/sellerdb";
-import { redirect } from "next/navigation";
+// import prisma from "../lib/sellerdb";
+// import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 
-async function getData(userId: string) {
-  const data = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      stripeConnectedLinked: true,
-    },
-  });
+// async function getData(userId: string) {
+//   const data = await prisma.user.findUnique({
+//     where: {
+//       id: userId,
+//     },
+//     select: {
+//       stripeConnectedLinked: true,
+//     },
+//   });
 
-  if (data?.stripeConnectedLinked === false) {
-    return redirect("/billing");
-  }
+//   if (data?.stripeConnectedLinked === false) {
+//     return redirect("/billing");
+//   }
 
-  return null;
-}
+//   return null;
+// }
 
 export default async function SellRoute() {
   noStore();

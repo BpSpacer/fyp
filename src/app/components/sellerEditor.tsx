@@ -77,7 +77,7 @@ export function TipTapEditor({
   setJson,
   json,
 }: {
-  setJson: any;
+  setJson: (content: JSONContent | null) => void;
   json: JSONContent | null;
 }) {
   const editor = useEditor({
@@ -85,7 +85,7 @@ export function TipTapEditor({
     content: json,
     editorProps: {
       attributes: {
-        class: "focus:outline-none min-h-[150px]  prose prose-sm sm:prose-base",
+        class: "focus:outline-none min-h-[150px] prose prose-sm sm:prose-base",
       },
     },
     onUpdate: ({ editor }) => {

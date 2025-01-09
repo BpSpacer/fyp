@@ -91,7 +91,7 @@ export const ourFileRouter = {
 
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 5 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async ({  }) => {
       const { getUser } = getKindeServerSession();
       const user = await getUser();
 
@@ -136,7 +136,7 @@ export const ourFileRouter = {
 
   productFileUpload: f({ image: { maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async ({  }) => {
       const { getUser } = getKindeServerSession();
       const user = await getUser();
 
