@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/supabase-client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("SUPABASE_DATABASE_URL")
+  directUrl = env("SUPABASE_DIRECT_URL")
+}
+
+model User {
+  id                    String  @id @unique
+  email                 String
+  firstName             String
+  lastName              String
+  profileImage          String
+  connectedAccountId    String  @unique
+  stripeConnectedLinked Boolean @default(false)
+
+  Product Product[]
+}
+
+model Seller {
+  id              String   @id @default(uuid())
+  firstName       String
+  lastName        String
+  fatherName      String
+  email           String   @unique
+  phone           String   @unique
+  cnic            String   @unique
+  accountType     String
+  accountNumber   String   @unique
+
+  createdAt       DateTime @default(now())
+}
+
+
+model Product {
+  id               String        @id @default(uuid())
+  name             String
+  price            Int
+  smallDescription String
+  description      Json
+  images           String[]
+  productFile      String
+  category         CategoryTypes
+
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+enum CategoryTypes {
+  saraiki
+  sindhi
+  punjabi
+  pashtun
+  balochi
+  kashmiri
+}
