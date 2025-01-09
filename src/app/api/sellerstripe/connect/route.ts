@@ -16,32 +16,34 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_CONNECT_WEBHOOK_SECRET as string
     );
-  } catch (error: unknown) {
-    return new Response("webhook error", { status: 400 });
+
+    switch (event.type) {
+      case "account.updated": {
+        const account = event.data.object;
+
+        // Update the database using Prisma
+        await prisma.user.update({
+          where: {
+            connectedAccountId: account.id,
+          },
+          data: {
+            stripeConnectedLinked:
+              account.capabilities?.transfers === "pending" ||
+              account.capabilities?.transfers === "inactive"
+                ? false
+                : true,
+          },
+        });
+        break;
+      }
+      default: {
+        console.log("Unhandled event type:", event.type);
+      }
+    }
+  } catch (err) {
+    console.error("Webhook error:", err); // Use `err` to avoid unused variable
+    return new Response("Webhook error", { status: 400 });
   }
-
-  // switch (event.type) {
-  //   case "account.updated": {
-  //     const account = event.data.object;
-
-  //     const data = await prisma.user.update({
-  //       where: {
-  //         connectedAccountId: account.id,
-  //       },
-  //       data: {
-  //         stripeConnectedLinked:
-  //           account.capabilities?.transfers === "pending" ||
-  //           account.capabilities?.transfers === "inactive"
-  //             ? false
-  //             : true,
-  //       },
-  //     });
-  //     break;
-  //   }
-  //   default: {
-  //     console.log("unhandled event");
-  //   }
-  // }
 
   return new Response(null, { status: 200 });
 }
