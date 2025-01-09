@@ -101,7 +101,7 @@ declare type BatchQuery = {
     args: JsArgs | RawQueryArgs;
 };
 
-declare type BatchQueryEngineResult<T> = QueryEngineResultData<T> | Error;
+declare type BatchQueryEngineResult<T> = QueryEngineResult<T> | Error;
 
 declare type BatchQueryOptionsCb = (args: BatchQueryOptionsCbArgs) => Promise<any>;
 
@@ -266,36 +266,7 @@ export declare type Count<O> = {
     [K in keyof O]: Count<number>;
 } & {};
 
-/**
- * Custom fetch function for `DataProxyEngine`.
- *
- * We can't use the actual type of `globalThis.fetch` because this will result
- * in API Extractor referencing Node.js type definitions in the `.d.ts` bundle
- * for the client runtime. We can only use such types in internal types that
- * don't end up exported anywhere.
-
- * It's also not possible to write a definition of `fetch` that would accept the
- * actual `fetch` function from different environments such as Node.js and
- * Cloudflare Workers (with their extensions to `RequestInit` and `Response`).
- * `fetch` is used in both covariant and contravariant positions in
- * `CustomDataProxyFetch`, making it invariant, so we need the exact same type.
- * Even if we removed the argument and left `fetch` in covariant position only,
- * then for an extension-supplied function to be assignable to `customDataProxyFetch`,
- * the platform-specific (or custom) `fetch` function needs to be assignable
- * to our `fetch` definition. This, in turn, requires the third-party `Response`
- * to be a subtype of our `Response` (which is not a problem, we could declare
- * a minimal `Response` type that only includes what we use) *and* requires the
- * third-party `RequestInit` to be a supertype of our `RequestInit` (i.e. we
- * have to declare all properties any `RequestInit` implementation in existence
- * could possibly have), which is not possible.
- *
- * Since `@prisma/extension-accelerate` redefines the type of
- * `__internalParams.customDataProxyFetch` to its own type anyway (probably for
- * exactly this reason), our definition is never actually used and is completely
- * ignored, so it doesn't matter, and we can just use `unknown` as the type of
- * `fetch` here.
- */
-declare type CustomDataProxyFetch = (fetch: unknown) => unknown;
+declare type CustomDataProxyFetch = (fetch: Fetch) => Fetch;
 
 declare class DataLoader<T = unknown> {
     private options;
@@ -718,7 +689,6 @@ export declare namespace DMMF {
     export type Model = ReadonlyDeep_2<{
         name: string;
         dbName: string | null;
-        schema: string | null;
         fields: Field[];
         uniqueFields: string[][];
         uniqueIndexes: uniqueIndex[];
@@ -744,12 +714,6 @@ export declare namespace DMMF {
          * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
          */
         type: string;
-        /**
-         * Native database type, if specified.
-         * For example, `@db.VarChar(191)` is encoded as `['VarChar', ['191']]`,
-         * `@db.Text` is encoded as `['Text', []]`.
-         */
-        nativeType?: [string, string[]] | null;
         dbName?: string | null;
         hasDefaultValue: boolean;
         default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
@@ -761,7 +725,7 @@ export declare namespace DMMF {
     }>;
     export type FieldDefault = ReadonlyDeep_2<{
         name: string;
-        args: Array<string | number>;
+        args: any[];
     }>;
     export type FieldDefaultScalar = string | boolean | number;
     export type Index = ReadonlyDeep_2<{
@@ -1073,7 +1037,7 @@ declare interface Engine<InteractiveTransactionPayload = unknown> {
     start(): Promise<void>;
     stop(): Promise<void>;
     version(forceRun?: boolean): Promise<string> | string;
-    request<T>(query: JsonQuery, options: RequestOptions<InteractiveTransactionPayload>): Promise<QueryEngineResultData<T>>;
+    request<T>(query: JsonQuery, options: RequestOptions_2<InteractiveTransactionPayload>): Promise<QueryEngineResult<T>>;
     requestBatch<T>(queries: JsonQuery[], options: RequestBatchOptions<InteractiveTransactionPayload>): Promise<BatchQueryEngineResult<T>[]>;
     transaction(action: 'start', headers: Transaction_2.TransactionHeaders, options: Transaction_2.Options): Promise<Transaction_2.InteractiveTransactionInfo<unknown>>;
     transaction(action: 'commit', headers: Transaction_2.TransactionHeaders, info: Transaction_2.InteractiveTransactionInfo<unknown>): Promise<void>;
@@ -1165,17 +1129,25 @@ declare type EngineEventType = QueryEventType | LogEventType;
 declare type EngineProtocol = 'graphql' | 'json';
 
 declare type EngineSpan = {
-    id: EngineSpanId;
-    parentId: string | null;
+    span: boolean;
     name: string;
-    startTime: HrTime;
-    endTime: HrTime;
+    trace_id: string;
+    span_id: string;
+    parent_span_id: string;
+    start_time: [number, number];
+    end_time: [number, number];
+    attributes?: Record<string, string>;
+    links?: {
+        trace_id: string;
+        span_id: string;
+    }[];
     kind: EngineSpanKind;
-    attributes?: Record<string, unknown>;
-    links?: EngineSpanId[];
 };
 
-declare type EngineSpanId = string;
+declare type EngineSpanEvent = {
+    span: boolean;
+    spans: EngineSpan[];
+};
 
 declare type EngineSpanKind = 'client' | 'internal';
 
@@ -1375,6 +1347,8 @@ export declare type ExtractGlobalOmit<Options, ModelName extends string> = Optio
         [K in ModelName]: infer GlobalOmit;
     };
 } ? GlobalOmit : {};
+
+declare type Fetch = typeof nodeFetch;
 
 /**
  * A reference to a specific field of a specific model
@@ -1744,8 +1718,6 @@ declare type HandleErrorParams = {
     globalOmit?: GlobalOmitOptions;
 };
 
-declare type HrTime = [number, number];
-
 /**
  * Defines High-Resolution Time.
  *
@@ -1758,7 +1730,7 @@ declare type HrTime = [number, number];
  * HrTime[1] = Number((1609504210.150 - HrTime[0]).toFixed(9)) * 1e9 = 150000000.
  * This is represented in HrTime format as [1609504210, 150000000].
  */
-declare type HrTime_2 = [number, number];
+declare type HrTime = [number, number];
 
 /**
  * Matches a JSON array.
@@ -1864,7 +1836,7 @@ declare type InternalRequestParams = {
     /** Used to convert args for middleware and back */
     middlewareArgsMapper?: MiddlewareArgsMapper<unknown, unknown>;
     /** Used for Accelerate client extension via Data Proxy */
-    customDataProxyFetch?: CustomDataProxyFetch;
+    customDataProxyFetch?: (fetch: Fetch) => Fetch;
 } & Omit<QueryMiddlewareParams, 'runInTransaction'>;
 
 declare enum IsolationLevel {
@@ -2193,6 +2165,37 @@ export declare type Narrow<A> = {
 export declare type Narrowable = string | number | bigint | boolean | [];
 
 export declare type NeverToUnknown<T> = [T] extends [never] ? unknown : T;
+
+/**
+ * Imitates `fetch` via `https` to only suit our needs, it does nothing more.
+ * This is because we cannot bundle `node-fetch` as it uses many other Node.js
+ * utilities, while also bloating our bundles. This approach is much leaner.
+ * @param url
+ * @param options
+ * @returns
+ */
+declare function nodeFetch(url: string, options?: RequestOptions): Promise<RequestResponse>;
+
+declare class NodeHeaders {
+    readonly headers: Map<string, string>;
+    constructor(init?: Record<any, any>);
+    append(name: string, value: string): void;
+    delete(name: string): void;
+    get(name: string): string | null;
+    has(name: string): boolean;
+    set(name: string, value: string): void;
+    forEach(callbackfn: (value: string, key: string, parent: this) => void, thisArg?: any): void;
+}
+
+/**
+ * @deprecated Please don´t rely on type checks to this error anymore.
+ * This will become a regular `PrismaClientKnownRequestError` with code `P2025`
+ * in the future major version of the client.
+ * Instead of `error instanceof Prisma.NotFoundError` use `error.code === "P2025"`.
+ */
+export declare class NotFoundError extends PrismaClientKnownRequestError {
+    constructor(message: string, clientVersion: string);
+}
 
 declare class NullTypesEnumValue extends ObjectEnumValue {
     _getNamespace(): string;
@@ -2531,8 +2534,8 @@ declare type QueryEngineConfig = {
     datasourceOverrides: Record<string, string>;
     env: Record<string, string | undefined>;
     logLevel: QueryEngineLogLevel;
+    telemetry?: QueryEngineTelemetry;
     engineProtocol: EngineProtocol;
-    enableTracing: boolean;
 };
 
 declare interface QueryEngineConstructor {
@@ -2540,20 +2543,20 @@ declare interface QueryEngineConstructor {
 }
 
 declare type QueryEngineInstance = {
-    connect(headers: string, requestId: string): Promise<void>;
-    disconnect(headers: string, requestId: string): Promise<void>;
+    connect(headers: string): Promise<void>;
+    disconnect(headers: string): Promise<void>;
     /**
      * @param requestStr JSON.stringified `QueryEngineRequest | QueryEngineBatchRequest`
      * @param headersStr JSON.stringified `QueryEngineRequestHeaders`
      */
-    query(requestStr: string, headersStr: string, transactionId: string | undefined, requestId: string): Promise<string>;
-    sdlSchema?(): Promise<string>;
-    startTransaction(options: string, traceHeaders: string, requestId: string): Promise<string>;
-    commitTransaction(id: string, traceHeaders: string, requestId: string): Promise<string>;
-    rollbackTransaction(id: string, traceHeaders: string, requestId: string): Promise<string>;
-    metrics?(options: string): Promise<string>;
-    applyPendingMigrations?(): Promise<void>;
-    trace(requestId: string): Promise<string | null>;
+    query(requestStr: string, headersStr: string, transactionId?: string): Promise<string>;
+    sdlSchema(): Promise<string>;
+    dmmf(traceparent: string): Promise<string>;
+    startTransaction(options: string, traceHeaders: string): Promise<string>;
+    commitTransaction(id: string, traceHeaders: string): Promise<string>;
+    rollbackTransaction(id: string, traceHeaders: string): Promise<string>;
+    metrics(options: string): Promise<string>;
+    applyPendingMigrations(): Promise<void>;
 };
 
 declare type QueryEngineLogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'off';
@@ -2563,8 +2566,14 @@ declare type QueryEngineRequest = {
     variables: Object;
 };
 
-declare type QueryEngineResultData<T> = {
+declare type QueryEngineResult<T> = {
     data: T;
+    elapsed: number;
+};
+
+declare type QueryEngineTelemetry = {
+    enabled: Boolean;
+    endpoint: string;
 };
 
 declare type QueryEvent = {
@@ -2652,7 +2661,7 @@ declare type RequestBatchOptions<InteractiveTransactionPayload> = {
     traceparent?: string;
     numTry?: number;
     containsWrite: boolean;
-    customDataProxyFetch?: CustomDataProxyFetch;
+    customDataProxyFetch?: (fetch: Fetch) => Fetch;
 };
 
 declare interface RequestError {
@@ -2672,7 +2681,7 @@ declare class RequestHandler {
     private logEmitter?;
     constructor(client: Client, logEmitter?: LogEmitter);
     request(params: RequestParams): Promise<any>;
-    mapQueryEngineResult({ dataPath, unpacker }: RequestParams, response: QueryEngineResultData<any>): any;
+    mapQueryEngineResult({ dataPath, unpacker }: RequestParams, response: QueryEngineResult<any>): any;
     /**
      * Handles the error and logs it, logging the error is done synchronously waiting for the event
      * handlers to finish.
@@ -2684,12 +2693,18 @@ declare class RequestHandler {
     get [Symbol.toStringTag](): string;
 }
 
-declare type RequestOptions<InteractiveTransactionPayload> = {
+declare type RequestOptions = {
+    method?: string;
+    headers?: Record<string, string>;
+    body?: string;
+};
+
+declare type RequestOptions_2<InteractiveTransactionPayload> = {
     traceparent?: string;
     numTry?: number;
     interactiveTransaction?: InteractiveTransactionOptions<InteractiveTransactionPayload>;
     isWrite: boolean;
-    customDataProxyFetch?: CustomDataProxyFetch;
+    customDataProxyFetch?: (fetch: Fetch) => Fetch;
 };
 
 declare type RequestParams = {
@@ -2707,7 +2722,17 @@ declare type RequestParams = {
     otelParentCtx?: Context;
     otelChildCtx?: Context;
     globalOmit?: GlobalOmitOptions;
-    customDataProxyFetch?: CustomDataProxyFetch;
+    customDataProxyFetch?: (fetch: Fetch) => Fetch;
+};
+
+declare type RequestResponse = {
+    ok: boolean;
+    url: string;
+    statusText?: string;
+    status: number;
+    headers: NodeHeaders;
+    text: () => Promise<string>;
+    json: () => Promise<any>;
 };
 
 declare type RequiredExtensionArgs = NameArgs & ResultArgs & ModelArgs & ClientArgs & QueryOptions;
@@ -3150,7 +3175,7 @@ export declare function sqltag(strings: readonly string[], ...values: readonly R
  *
  * hrtime, epoch milliseconds, performance.now() or Date
  */
-declare type TimeInput = HrTime_2 | number | Date;
+declare type TimeInput = HrTime | number | Date;
 
 export declare type ToTuple<T> = T extends any[] ? T : [T];
 
@@ -3195,7 +3220,7 @@ declare interface TraceState {
 declare interface TracingHelper {
     isEnabled(): boolean;
     getTraceParent(context?: Context): string;
-    dispatchEngineSpans(spans: EngineSpan[]): void;
+    createEngineSpan(engineSpanEvent: EngineSpanEvent): void;
     getActiveContext(): Context | undefined;
     runInChildSpan<R>(nameOrOptions: string | ExtendedSpanOptions, callback: SpanCallback<R>): R;
 }
