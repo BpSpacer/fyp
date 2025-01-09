@@ -40,13 +40,11 @@ export default function Main() {
       </section>
 
       <section className="max-w-3xl mx-auto text-center pt-52">
-        <h1 className="text-2xl sm:text-5xl lg:text-6xl font-semibold">Find the best Culture</h1>
-        <h1 className="text-primary text-2xl sm:text-5xl lg:text-6xl font-semibold">
-          of{" "}
-          <span className="inline-block">
-            <Geolocation />
-          </span>
-        </h1>
+  <h1 className="text-2xl sm:text-5xl lg:text-6xl font-semibold">Find the best Culture of</h1>
+  <div className="inline-block">
+    <Geolocation />
+  </div>
+
 
         <p className="lg:text-lg text-muted-foreground mx-auto mt-5 w-[90%] font-normal text-base">
           CulturalHatti stands out as the premier marketplace for all things related to Culture,

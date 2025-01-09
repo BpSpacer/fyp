@@ -48,7 +48,7 @@ function Geolocation() {
     }, [latitude, longitude]);
 
     const handleNavigation = (path: string) => {
-        window.location.href = `http://localhost:3000/products/${path}`;
+        window.location.href = `http://fypiqra.vercel.app/storefront/products/${path}`;
     };
 
     const renderButton = () => {
@@ -100,15 +100,15 @@ function Geolocation() {
     return (
         <div className="flex justify-center items-center h-full">
             {loading ? (
-                <p>Loading...</p>
+                <p className='text-primary text-2xl sm:text-5xl lg:text-6xl font-semibold mb-4'>Loading...</p>
             ) : (
                 province ? (
                     <div className="text-center ">
-                        <p>{province}</p>
+                        <p className='text-primary text-2xl sm:text-5xl lg:text-6xl font-semibold mb-4'>{province}</p>
                         {renderButton()}
                     </div>
                 ) : (
-                    <p>Pakistan</p>
+                    <p className='text-primary text-2xl sm:text-5xl lg:text-6xl font-semibold mb-4'>Pakistan</p>
                 )
             )}
         </div>
