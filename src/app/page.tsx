@@ -11,23 +11,30 @@ import { ProductRow } from './components/sellerProductRow';
 import arrow from "@/public/arrow.png";
 import Image from "next/image";
 import Link from 'next/link';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { unstable_noStore as noStore } from "next/cache";
 
 
-export default function Main() {
+export default async function Main() {
+  noStore();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
     <>
       <div className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8'>
         <Navbar />
       </div>
 
-      <div className="flex justify-end items-center space-x-4 sticky mb-2">
-        <div className="relative w-48 h-10">
-          <Image src={arrow} alt="Image" className="w-full h-full object-cover" />
-          <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-xs">
-            <Link href="/billing">Sell on Hatti</Link>
-          </span>
+      {user && (
+        <div className="flex justify-end items-center space-x-4 sticky mb-2">
+          <div className="relative w-48 h-10">
+            <Image src={arrow} alt="Image" className="w-full h-full object-cover" />
+            <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-xs">
+              <Link href="/billing">Sell on Hatti</Link>
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       <main className="app transition-all ease-in ">
         <Home />
