@@ -117,12 +117,13 @@ export function SellForm() {
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
               setImages(res.map((item) => item.url));
-              toast.success("Your images have been uploaded");
+              toast.success("Your images have been uploaded"); // Toast for images
             }}
             onUploadError={() => {
               toast.error("Something went wrong, try again");
             }}
           />
+
           {state?.errors?.["images"]?.[0] && (
             <p className="text-destructive">{state?.errors?.["images"]?.[0]}</p>
           )}
@@ -134,13 +135,14 @@ export function SellForm() {
           <UploadDropzone
             onClientUploadComplete={(res) => {
               SetProductFile(res[0].url);
-              toast.success("Your Product file has been uplaoded!");
+              toast.success("Your Product file has been uploaded!"); // Toast for product files
             }}
             endpoint="productFileUpload"
             onUploadError={() => {
               toast.error("Something went wrong, try again");
             }}
           />
+
           {state?.errors?.["productFile"]?.[0] && (
             <p className="text-destructive">
               {state?.errors?.["productFile"]?.[0]}

@@ -4,23 +4,12 @@ const nextConfig = {
     //   ignoreDuringBuilds: true,
     // },
     images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'utfs.io',
-          pathname: '/**',
-        },
-        {
-          protocol: 'https',
-          hostname: 'lh3.googleusercontent.com',
-          pathname: '/**',
-        },
-        {
-          protocol: 'https',
-          hostname: 'gravatar.com',
-          pathname: '/**',
-        },
-      ],
+        domains: [
+          'utfs.io',
+          'lh3.googleusercontent.com',
+          'gravatar.com',
+          'xc6ppplfpy.ufs.sh', 
+        ],
     },
   };
   

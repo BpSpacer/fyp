@@ -29,7 +29,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Sindhi Products",
-        link: "/products/sindhi",
+        link: "/seller-products/sindhi",
       };
     }
     case "punjabi": {
@@ -50,7 +50,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Punjabi Products",
-        link: "/products/punjabi",
+        link: "/seller-products/punjabi",
       };
     }
     case "pashtun": {
@@ -71,7 +71,7 @@ async function getData({ category }: iAppProps) {
       return {
         title: "Pashtun Products",
         data: data,
-        link: "/products/pashtun",
+        link: "/seller-products/pashtun",
       };
     }
     case "balochi": {
@@ -92,7 +92,7 @@ async function getData({ category }: iAppProps) {
       return {
         title: "Balochi Products",
         data: data,
-        link: "/products/balochi",
+        link: "/seller-products/balochi",
       };
     }
     case "kashmiri": {
@@ -113,7 +113,7 @@ async function getData({ category }: iAppProps) {
       return {
         title: "Kashmiri Products",
         data: data,
-        link: "/products/kashmiri",
+        link: "/seller-products/kashmiri",
       };
     }
     case "saraiki": {
@@ -134,7 +134,7 @@ async function getData({ category }: iAppProps) {
       return {
         title: "Saraiki Products",
         data: data,
-        link: "/products/saraiki",
+        link: "/seller-products/saraiki",
       };
     }
     case "newest": {
@@ -155,7 +155,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Newest Products",
-        link: "/products/all",
+        link: "/seller-products/all",
       };
     }
     default: {
