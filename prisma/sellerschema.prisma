@@ -19,7 +19,24 @@ model User {
   connectedAccountId    String  @unique
   stripeConnectedLinked Boolean @default(false)
 
+  orders Order[]
   Product Product[]
+}
+
+model Order {
+  id           String   @id @default(uuid())
+  status       String   @default("pending")
+  amount       Int
+  addressLine1 String
+  city         String
+  state        String
+  phone        String
+  notes        String?  // Optional field for additional notes
+
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?
+
+  createdAt    DateTime @default(now())
 }
 
 model Seller {

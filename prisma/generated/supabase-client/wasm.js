@@ -17,11 +17,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.22.0
+ * Prisma Client JS version: 6.2.1
  * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
  */
 Prisma.prismaVersion = {
-  client: "5.22.0",
+  client: "6.2.1",
   engine: "4123509d24aa4dede1e864b46351bf2790323b69"
 }
 
@@ -48,11 +48,6 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 Prisma.PrismaClientValidationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.NotFoundError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`NotFoundError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
 In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
 )}
 Prisma.Decimal = Decimal
@@ -132,6 +127,19 @@ exports.Prisma.UserScalarFieldEnum = {
   stripeConnectedLinked: 'stripeConnectedLinked'
 };
 
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  amount: 'amount',
+  addressLine1: 'addressLine1',
+  city: 'city',
+  state: 'state',
+  phone: 'phone',
+  notes: 'notes',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SellerScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
@@ -172,15 +180,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
 };
 exports.CategoryTypes = exports.$Enums.CategoryTypes = {
   saraiki: 'saraiki',
@@ -193,6 +201,7 @@ exports.CategoryTypes = exports.$Enums.CategoryTypes = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Order: 'Order',
   Seller: 'Seller',
   Product: 'Product'
 };

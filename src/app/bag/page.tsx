@@ -56,7 +56,7 @@ export default async function BagRoute() {
             <div key={item.id} className="flex">
               <div className="w-24 h-24 sm:w-32 sm:h-32 relative">
                 <Image
-                  className="rounded-md object-cover"
+                  className="rounded-md object-cover border"
                   fill
                   src={item.imageString}
                   alt="Product image"
@@ -64,6 +64,8 @@ export default async function BagRoute() {
               </div>
               <div className="ml-5 flex justify-between w-full font-medium">
                 <p>{item.name}</p>
+                <div className="ml-5 flex justify-between w-full font-sm text-gray-600">
+                <p>{item.description}</p>
                 <div className="flex flex-col h-full justify-between">
                   <div className="flex items-center gap-x-2">
                     <p>{item.quantity} x</p>
@@ -75,6 +77,7 @@ export default async function BagRoute() {
                     <DeleteItem />
                   </form>
                 </div>
+              </div>
               </div>
             </div>
           ))}
@@ -135,7 +138,7 @@ export default async function BagRoute() {
                   placeholder="Add any notes (optional)"
                 />
               </div>
-              <div className="mt-6">
+              <div className="mt-6 pb-4">
                 <Button type="submit" className="w-full">
                   Proceed to Checkout
                 </Button>

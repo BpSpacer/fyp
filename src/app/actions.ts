@@ -234,7 +234,7 @@ export async function delItem(formData: FormData) {
     await redis.set(`cart-${user.id}`, updateCart);
   }
 
-  revalidatePath("/storefront/bag");
+  revalidatePath("/bag");
 }
 
 export async function checkOut(formData: FormData) {

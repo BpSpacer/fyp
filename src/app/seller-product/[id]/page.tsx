@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
-import { ShoppingBagButton } from "@/app/components/sellerSubmitButtons";
+import { BuyButton } from "@/app/components/sellerSubmitButtons";
 import { Navbar } from "@/app/components/storefront/Navbar";
 import { Footer } from "@/app/components/storefront/Footer";
 
@@ -78,8 +78,8 @@ export default async function ProductPage({
         <p className="mt-2 text-muted-foreground">{data?.smallDescription}</p>
         <form action={BuyProduct}>
           <input type="hidden" name="id" value={data?.id} />
-          {/* <BuyButton price={data?.price as number} /> */}
-          <ShoppingBagButton />
+          <BuyButton price={data?.price as number} />
+          {/* <ShoppingBagButton /> */}
         </form>
 
         <div className="border-t border-gray-200 mt-10 pt-10">

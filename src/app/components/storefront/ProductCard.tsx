@@ -22,18 +22,24 @@ interface iAppProps {
 
 export function ProductCard({ item }: iAppProps) {
   return (
-    <div className="rounded-lg">
-      <Carousel className="w-full mx-auto">
+    <div className="rounded-lg border">
+      <Carousel className="w-full mx-auto ">
         <CarouselContent>
           {item.images.map((item, index) => (
             <CarouselItem key={index}>
-              <div className="relative h-[330px]">
+              <div className="relative h-[330px] ">
                 <Image
                   src={item}
                   alt="Product Image"
                   fill
-                  className="object-cover object-center w-full h-full rounded-lg"
+                  className="object-cover object-center w-full h-full rounded-t-lg border-b bg-primary/10"
                 />
+                <div className="px-2 py-2">
+                <h3
+                  className="pt-2  inline-flex items-center rounded-md bg-white px-2 py-2 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10 relative z-10">
+                  Product from Hatti
+                </h3>
+                </div>
               </div>
             </CarouselItem>
           ))}
@@ -42,19 +48,20 @@ export function ProductCard({ item }: iAppProps) {
         <CarouselNext className="mr-16" />
       </Carousel>
 
-      <div className="flex justify-between items-center mt-2">
+      <div className="flex justify-between items-center mt-2 w-96 px-5">
         <h1 className="font-semibold text-xl line-clamp-1">{item.name}</h1>
         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
           ${item.price}
         </h3>
       </div>
-      <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+      <p className="text-gray-600 text-sm mt-2 line-clamp-2 w-96 px-5">
         {item.description}
       </p>
-
-      <Button asChild className="w-full mt-5">
+      <div className="px-5 w-96">
+      <Button asChild className="mt-5 w-full mb-5">
         <Link href={`/storefront/product/${item.id}`}>Buy Now!</Link>
       </Button>
+      </div>
     </div>
   );
 }
