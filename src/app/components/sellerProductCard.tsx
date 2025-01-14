@@ -41,7 +41,7 @@ export function ProductCard({
                 <div className="px-2 py-2">
                 <h3
                   className="pt-2  inline-flex items-center rounded-md bg-white px-2 py-2 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10 relative z-10">
-                  Product from Seller's
+                  Product from Seller
                 </h3>
                 </div>
               </div>
