@@ -161,6 +161,7 @@ export async function addItem(productId: string) {
       name: true,
       price: true,
       images: true,
+      description: true
     },
     where: {
       id: productId,
@@ -181,6 +182,7 @@ export async function addItem(productId: string) {
           id: selectedProduct.id,
           imageString: selectedProduct.images[0],
           name: selectedProduct.name,
+          description: selectedProduct.description,
           quantity: 1,
         },
       ],
@@ -203,6 +205,7 @@ export async function addItem(productId: string) {
         imageString: selectedProduct.images[0],
         name: selectedProduct.name,
         price: selectedProduct.price,
+        description: selectedProduct.description,
         quantity: 1,
       });
     }
