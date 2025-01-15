@@ -227,7 +227,7 @@ export async function CreateStripeAccoutnLink() {
     return_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/seller-return/${data?.connectedAccountId}`
-        : `https://fypiqra.vercel.app/return/${data?.connectedAccountId}`,
+        : `https://fypiqra.vercel.app/seller-return/${data?.connectedAccountId}`,
     type: "account_onboarding",
   });
 
