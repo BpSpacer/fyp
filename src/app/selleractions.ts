@@ -111,23 +111,35 @@ export async function UpdateUserSettings(prevState: unknown, formData: FormData)
     return state;
   }
 
-  // const data = await prisma.user.update({
-  //   where: {
-  //     id: user.id,
-  //   },
-  //   data: {
-  //     firstName: validateFields.data.firstName,
-  //     lastName: validateFields.data.lastName,
-  //   },
-  // });
+  try {
+    // const data = await prisma.user.update({
+    //   where: {
+    //     id: user.id,
+    //   },
+    //   data: {
+    //     firstName: validateFields.data.firstName,
+    //     lastName: validateFields.data.lastName,
+    //   },
+    // });
 
-  const state: State = {
-    status: "success",
-    message: "Your Settings have been updated",
-  };
+    const state: State = {
+      status: "success",
+      message: "Your Settings have been updated",
+    };
 
-  return state;
+    return state;
+  } catch (error) {
+    console.error("Error updating user settings:", error);
+
+    const state: State = {
+      status: "error",
+      message: "Failed to update user settings. Please try again later.",
+    };
+
+    return state;
+  }
 }
+
 
 export async function BuyProduct(formData: FormData) {
   const id = formData.get("id") as string;

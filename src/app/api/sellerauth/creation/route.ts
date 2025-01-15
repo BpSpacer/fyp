@@ -9,14 +9,12 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user === null || !user.id) {
+  if (!user || !user.id) {
     throw new Error("Something went wrong...");
   }
 
   let dbUser = await prisma.user.findUnique({
-    where: {
-      id: user.id,
-    },
+    where: { id: user.id },
   });
 
   if (!dbUser) {
@@ -48,9 +46,11 @@ export async function GET() {
     });
   }
 
+  // Automatically redirect to `/api/auth/creation`
   return NextResponse.redirect(
     process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://fypiqra.vercel.app/"
+      ? "http://localhost:3000/api/auth/creation"
+      : "https://fypiqra.vercel.app/api/auth/creation"
   );
 }
+  
