@@ -190,11 +190,11 @@ export async function BuyProduct(formData: FormData) {
     success_url:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/seller-payment/success"
-        : "https://fypiqra.vercel.app/payment/success",
+        : "https://fypiqra.vercel.app/seller-payment/success",
     cancel_url:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/seller-payment/cancel"
-        : "https://fypiqra.vercel.app/payment/cancel",
+        : "https://fypiqra.vercel.app/seller-payment/cancel",
   });
 
   return redirect(session.url as string);

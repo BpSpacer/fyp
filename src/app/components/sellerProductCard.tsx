@@ -63,7 +63,7 @@ export function ProductCard({
     </p>
   
     <Button asChild className="mt-5 w-11/12 mb-4">
-      <Link href={`/storefront/product/${id}`}>Buy Now!</Link>
+      <Link href={`/seller-product/${id}`}>Buy Now!</Link>
     </Button>
   </div>
 
