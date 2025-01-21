@@ -36,21 +36,22 @@ export default async function Main() {
         </div>
       )}
 
-      <main className="app transition-all ease-in ">
+      <section className="pt-5 max-w-15xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
+        <Hero />
+      </section>
+
+      <main className=" app transition-all ease-in ">
         <Home />
         <Canvas />
         <Customizer />
       </main>
 
-      <section className="pt-20 max-w-15xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Hero />
-      </section>
 
-      <section className="max-w-3xl mx-auto text-center pt-52">
-  <h1 className="text-2xl sm:text-5xl lg:text-6xl font-semibold">Find the best Culture of</h1>
-  <div className="inline-block">
-    <Geolocation />
-  </div>
+      <section className="max-w-3xl mx-auto text-center pt-20">
+        <h1 className="text-2xl sm:text-5xl lg:text-6xl font-semibold">Find the best Culture of</h1>
+        <div className="inline-block">
+          <Geolocation />
+        </div>
 
 
         <p className="lg:text-lg text-muted-foreground mx-auto mt-5 w-[90%] font-normal text-base">

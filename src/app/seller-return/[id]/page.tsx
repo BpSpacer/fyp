@@ -16,9 +16,9 @@ export default function ReturnUrlStripe() {
               Linking was Successful
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Congrats on linking your account to CulturalHatti. You can now start
-              selling your products!
+              Your request has been submitted for confirmation. Once approved, you will gain access to your Dashboard.
             </p>
+
 
             <Button className="mt-5 sm:mt-6 w-full" asChild>
               <Link href="/">Back to Homepage</Link>
