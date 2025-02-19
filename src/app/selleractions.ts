@@ -5,6 +5,8 @@ import prisma from "./lib/sellerdb";
 import { type CategoryTypes } from "../../prisma/generated/supabase-client";
 import { stripe } from "./lib/stripe";
 import { redirect } from "next/navigation";
+import { parseWithZod } from "@conform-to/zod";
+import { sellerControl } from "./lib/zodsellerSchema";
 
 export type State = {
   status: "error" | "success" | undefined;
@@ -257,4 +259,52 @@ export async function GetStripeDashboardLink() {
   );
 
   return redirect(loginLink.url);
+}
+/////
+export async function createSeller(prevState: unknown, formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user || user.email !== "culturalhatti@gmail.com") {
+    return redirect("/");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: sellerControl,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  await prisma.user.create({
+    data: {
+      id: submission.value.id,
+      firstName: submission.value.firstName,
+      lastName: submission.value.lastName,
+      email: submission.value.email,
+      stripeConnectedLinked: submission.value.stripeConnectedLinked,
+      profileImage: submission.value.profileImage,
+      connectedAccountId: submission.value.connectedAccountId,
+    },
+  });
+
+  redirect("/dashboard/sellercontrol");
+}
+
+export async function deleteSeller(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user || user.email !== "culturalhatti@gmail.com") {
+    return redirect("/");
+  }
+
+  await prisma.user.delete({
+    where: {
+      id: formData.get("SellerId") as string,
+    },
+  });
+
+  redirect("/dashboard/sellercontrol");
 }

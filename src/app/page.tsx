@@ -21,7 +21,7 @@ export default async function Main() {
   const user = await getUser();
   return (
     <>
-      <div className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-2'>
         <Navbar />
       </div>
 
@@ -36,7 +36,7 @@ export default async function Main() {
         </div>
       )}
 
-      <section className="pt-5 max-w-15xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
+      <section className="pt-2 max-w-16xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
         <Hero />
       </section>
 
@@ -45,6 +45,7 @@ export default async function Main() {
         <Canvas />
         <Customizer />
       </main>
+
 
 
       <section className="max-w-3xl mx-auto text-center pt-20">

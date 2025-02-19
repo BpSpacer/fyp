@@ -21,6 +21,10 @@ const links = [
     name: "Banner Picture",
     href: "/dashboard/banner",
   },
+  {
+    name: "Manage Sellers",
+    href: "/dashboard/sellercontrol",
+  },
 ];
 
 export function DashboardNavigation() {

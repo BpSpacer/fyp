@@ -59,7 +59,7 @@ function Geolocation() {
                         Browse Punjabi Products
                     </Button>
                 );
-            case 'kpk':
+            case 'Khyber Pakhtunkhwa':
                 return (
                     <DropdownMenu>
                         <DropdownMenuItem onClick={() => handleNavigation('saraiki')}>

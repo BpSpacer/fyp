@@ -7,6 +7,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import TrueFocus from '../../components/TrueFocus';
+
+
 
 async function getData() {
   const data = await prisma.banner.findMany({
@@ -34,7 +37,16 @@ export async function Hero() {
                 className="object-cover w-full h-full rounded-xl"
               />
               <div className="absolute top-6 left-6 bg-opacity-75 bg-black text-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105">
-                <h1 className="text-xl lg:text-4xl font-bold">{item.title}</h1>
+                <div className="text-xl lg:text-4xl font-bold">
+                <TrueFocus 
+                  sentence={item.title}
+                  manualMode={false}
+                  blurAmount={5}
+                  borderColor="#2563eb"
+                  animationDuration={2}
+                  pauseBetweenAnimations={1}
+                />
+                </div>
               </div>
             </div>
           </CarouselItem>
