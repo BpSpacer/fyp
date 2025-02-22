@@ -13,12 +13,28 @@ import Image from "next/image";
 import Link from 'next/link';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { unstable_noStore as noStore } from "next/cache";
+import BounceCards from './components/storefront/BounceCards'
 
 
 export default async function Main() {
   noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+  const images = [
+    "https://i.ibb.co/6RZnFWWt/Image2.jpg",
+    "https://i.ibb.co/bMfd2BS5/Image3.jpg",
+    "https://i.ibb.co/Q3KMVX7P/Image5.jpg",
+    "https://i.ibb.co/d4pZJgRt/Image4.jpg",
+    "https://i.ibb.co/Y7XZmbNB/Image1.jpg"
+  ];
+
+  const transformStyles = [
+    "rotate(5deg) translate(-150px)",
+    "rotate(0deg) translate(-70px)",
+    "rotate(-5deg)",
+    "rotate(5deg) translate(70px)",
+    "rotate(-5deg) translate(150px)"
+  ];
   return (
     <>
       <div className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-2'>
@@ -61,6 +77,20 @@ export default async function Main() {
         </p>
       </section>
 
+      <section className='flex justify-center items-center mt-10'>
+        <BounceCards
+          className="custom-bounceCards"
+          images={images}
+          containerWidth={500}
+          containerHeight={250}
+          animationDelay={1}
+          animationStagger={0.08}
+          easeType="elastic.out(1, 0.5)"
+          transformStyles={transformStyles}
+          enableHover={false}
+        />
+      </section>
+
       <section className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8'>
         <CategoriesSelection />
       </section>
@@ -71,12 +101,12 @@ export default async function Main() {
 
       <section className='max-w-15xl mx-auto px-4 sm:px-6 lg:px-8'>
         <ProductRow category="newest" />
-        <ProductRow category="sindhi" />
-        <ProductRow category="punjabi" />
         <ProductRow category="pashtun" />
         <ProductRow category="balochi" />
-        <ProductRow category="kashmiri" />
         <ProductRow category="saraiki" />
+        <ProductRow category="sindhi" />
+        <ProductRow category="kashmiri" />
+        <ProductRow category="punjabi" />
       </section>
 
       <Footer />

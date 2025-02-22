@@ -21,7 +21,7 @@ export function CategoriesSelection() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-        <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:aspect-w-1 sm:row-span-2 border-spacing-1 border-black">
+        <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:aspect-w-1 sm:row-span-2 border-spacing-1 border-black border-2">
           <Image
             src={all}
             alt="All Products Image"
@@ -36,7 +36,7 @@ export function CategoriesSelection() {
           </div>
         </div>
 
-        <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
+        <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full border-black border-2">
           <Image
             src={men}
             alt="Products for men Image"
@@ -51,7 +51,7 @@ export function CategoriesSelection() {
           </div>
         </div>
 
-        <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
+        <div className="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full border-black border-2">
           <Image
             src={women}
             alt="Women product image"
